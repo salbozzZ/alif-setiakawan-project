@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initProjectFilter();
   initProjectModal();
+  initGallery();
   initSimulator();
   initContactForm();
 });
@@ -580,5 +581,163 @@ function initContactForm() {
         `;
       }, 4000);
     }, 800);
+  });
+}
+
+/* ================= 7. GALERI FOTO & LIGHTBOX CONTROLLER ================= */
+const galleryPhotos = [
+  {
+    title: "Perakitan & Upgrade NVMe SSD Workstation",
+    category: "Hardware & PC",
+    badgeClass: "hw",
+    location: "Workstation Lab / On-site",
+    tag: "Preventive Maintenance",
+    desc: "Dokumentasi pergantian drive lama ke SSD M.2 NVMe berkecepatan tinggi, pembersihan sirkulasi kipas, dan repasting thermal paste pendingin prosesor guna mengatasi suhu throttling."
+  },
+  {
+    title: "Restrukturisasi Wiring Rack Server & Patch Panel",
+    category: "Jaringan & Server",
+    badgeClass: "net",
+    location: "Server Room Lt. 2",
+    tag: "Cable Management",
+    desc: "Dokumentasi penataan kabel UTP Cat6 dengan numbering patch panel, pemisahan kabel power vs data, dan perapihan switch gigabit agar memudahkan identifikasi port bermasalah."
+  },
+  {
+    title: "Konfigurasi MikroTik Bandwidth Management & VLAN",
+    category: "Jaringan & Server",
+    badgeClass: "net",
+    location: "Network Control Room",
+    tag: "MikroTik RouterOS",
+    desc: "Tangkapan layar konfigurasi Simple Queue QoS bandwidth internet dan segmentasi VLAN antar departemen untuk mencegah lag pada sesi video meeting manajemen."
+  },
+  {
+    title: "Konfigurasi Network Printer & Print Server",
+    category: "Perangkat Kantor",
+    badgeClass: "dev",
+    location: "Operational Office",
+    tag: "Network Peripherals",
+    desc: "Pemasangan printer jaringan multifungsi, penetapan IP statis, pembersihan spooler cetak yang tersangkut, dan mapping printer share ke seluruh workstation karyawan."
+  },
+  {
+    title: "Instalasi Kamera CCTV IP PoE & Penarikan Kabel STP",
+    category: "Keamanan & IoT",
+    badgeClass: "dev",
+    location: "Area Gudang & Lobi",
+    tag: "CCTV Surveillance",
+    desc: "Penarikan kabel shielded twisted pair (STP), pemasangan bracket outdoor kamera 4K PoE, dan integrasi stream video terenkripsi melalui VPN WireGuard."
+  },
+  {
+    title: "Rollout & Kloning Massal Windows 11 Workstation",
+    category: "Hardware & OS",
+    badgeClass: "hw",
+    location: "Deployment Bench",
+    tag: "OS Rollout & BitLocker",
+    desc: "Proses kloning massal golden image Windows 11 terstandarisasi menggunakan Clonezilla, aktivasi BitLocker, dan auto-join Active Directory tanpa instalasi manual satu per satu."
+  }
+];
+
+let currentLightboxIndex = 0;
+
+function initGallery() {
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  const galleryCards = document.querySelectorAll('.gallery-card');
+
+  // Filter Galeri
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterCat = btn.getAttribute('data-gallery-filter');
+
+      galleryCards.forEach(card => {
+        const itemCat = card.getAttribute('data-gallery-cat');
+        if (filterCat === 'all' || itemCat === filterCat) {
+          card.style.display = 'flex';
+          card.style.animation = 'fadeIn 0.3s ease-out';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Lightbox Modal Controls
+  const lightbox = document.getElementById('gallery-lightbox');
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+
+  window.openLightbox = function(index) {
+    currentLightboxIndex = index;
+    renderLightboxItem();
+    lightbox.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  };
+
+  function renderLightboxItem() {
+    const data = galleryPhotos[currentLightboxIndex];
+    if (!data) return;
+
+    // Ambil visual dari card bersangkutan
+    const card = galleryCards[currentLightboxIndex];
+    const thumbWrap = card ? card.querySelector('.gallery-img-canvas') : null;
+    const mediaWrap = document.getElementById('lightbox-media');
+
+    if (thumbWrap && mediaWrap) {
+      mediaWrap.innerHTML = thumbWrap.innerHTML;
+    }
+
+    const badge = document.getElementById('lightbox-badge');
+    badge.textContent = data.category;
+    badge.className = `gallery-badge ${data.badgeClass}`;
+
+    document.getElementById('lightbox-counter').textContent = `Foto ${currentLightboxIndex + 1} dari ${galleryPhotos.length}`;
+    document.getElementById('lightbox-title').textContent = data.title;
+    document.getElementById('lightbox-desc').textContent = data.desc;
+    document.getElementById('lightbox-loc').textContent = `📍 ${data.location}`;
+    document.getElementById('lightbox-tag').textContent = `🏷️ ${data.tag}`;
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentLightboxIndex = (currentLightboxIndex - 1 + galleryPhotos.length) % galleryPhotos.length;
+      renderLightboxItem();
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentLightboxIndex = (currentLightboxIndex + 1) % galleryPhotos.length;
+      renderLightboxItem();
+    });
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightbox && !lightbox.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') {
+        currentLightboxIndex = (currentLightboxIndex - 1 + galleryPhotos.length) % galleryPhotos.length;
+        renderLightboxItem();
+      }
+      if (e.key === 'ArrowRight') {
+        currentLightboxIndex = (currentLightboxIndex + 1) % galleryPhotos.length;
+        renderLightboxItem();
+      }
+    }
   });
 }

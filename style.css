@@ -1689,6 +1689,338 @@ button, input, select, textarea {
   color: var(--primary);
 }
 
+/* ================= GALERI FOTO KEGIATAN IT ================= */
+.gallery-filter {
+  margin-bottom: 30px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.gallery-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg);
+}
+
+.gallery-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.gallery-img-canvas {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+.gallery-card:hover .gallery-img-canvas {
+  transform: scale(1.05);
+}
+
+.gallery-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-card:hover .gallery-img {
+  transform: scale(1.05);
+}
+
+.gallery-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-badge.hw  { background: rgba(14, 165, 233, 0.9); color: #ffffff; }
+.gallery-badge.net { background: rgba(99, 102, 241, 0.9); color: #ffffff; }
+.gallery-badge.dev { background: rgba(16, 185, 129, 0.9); color: #ffffff; }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.65);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: 3;
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-zoom-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(10px);
+  transition: transform var(--transition-fast);
+}
+
+.gallery-card:hover .gallery-zoom-btn {
+  transform: translateY(0);
+}
+
+.gallery-info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.gallery-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.gallery-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+.gallery-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.gallery-custom-tip {
+  background: var(--bg-card);
+  border: 1px dashed rgba(var(--primary-rgb), 0.4);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.tip-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.tip-text strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.tip-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tip-text code {
+  background: var(--bg-input);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+/* ================= LIGHTBOX MODAL ================= */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 15, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: modal-appear 0.25s ease-out;
+}
+
+.lightbox-container {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  max-width: 820px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 1;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-close-btn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+.lightbox-nav-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-nav-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.lightbox-nav-btn.prev {
+  left: 16px;
+}
+
+.lightbox-nav-btn.next {
+  right: 16px;
+}
+
+.lightbox-media-wrap {
+  width: 100%;
+  background: #090d16;
+  min-height: 300px;
+  max-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lightbox-media-wrap svg,
+.lightbox-media-wrap img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-caption {
+  padding: 22px 26px;
+}
+
+.lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.lightbox-counter {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.lightbox-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.lightbox-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 992px) {
   .hero-container {
@@ -1701,6 +2033,10 @@ button, input, select, textarea {
   }
 
   .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1752,7 +2088,8 @@ button, input, select, textarea {
     font-size: 2.1rem;
   }
 
-  .projects-grid {
+  .projects-grid,
+  .gallery-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1768,7 +2105,7 @@ button, input, select, textarea {
 /* ===================================================================
    PRINT STYLESHEET (@media print)
    Optimized specifically for printing clean, professional A4 PDF CV
-=================================================================== */
+================================================================== */
 @media print {
   /* Hide interactive, non-print UI elements */
   .navbar,
@@ -1776,6 +2113,8 @@ button, input, select, textarea {
   .terminal-card,
   .quick-contact-box,
   .filter-wrapper,
+  #galeri,
+  .lightbox-overlay,
   #simulator,
   #testimoni,
   #kontak,

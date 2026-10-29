@@ -36,11 +36,15 @@ Alif Project/
 4. **Portofolio Studi Kasus Berbasis Metode STAR (Situation, Task, Action, Result)**:
    - 6 proyek nyata dunia IT Support (Migrasi massal Windows 11, Perapihan Rack Server & VLAN MikroTik, Helpdesk Jira, Backup 3-2-1 Synology, CCTV IP WireGuard, Revitalisasi Hardware Workstation).
    - Dilengkapi filter kategori dan jendela **Modal Detail Interaktif**.
-5. **Simulasi Alat Diagnostik IT Interaktif (Live Diagnostic Tool)**:
+5. **Galeri Foto Kegiatan & Dokumentasi IT**:
+   - Menampilkan dokumentasi visual aktivitas teknisi: perakitan & upgrade SSD, cable management rack server, konfigurasi Winbox MikroTik, instalasi CCTV PoE, printer sharing, dan deployment OS massal.
+   - Dilengkapi filter kategori foto dan fitur **Lightbox interaktif** (zoom, navigasi slide foto berikutnya/sebelumnya, serta tombol keyboard panah kiri/kanan).
+   - Mudah diganti dengan foto asli Anda sendiri cukup dengan menaruh berkas foto di folder `assets/gallery/`.
+6. **Simulasi Alat Diagnostik IT Interaktif (Live Diagnostic Tool)**:
    - **Terminal Ping Simulator**: Menguji respon latency gateway, DNS, dan server secara visual.
    - **Subnet IPv4 Calculator**: Menghitung netmask, IP network, range host valid, dan broadcast secara dinamis.
    - **Decision Tree Helpdesk**: Panduan langkah penanganan insiden umum (No Internet, Spooler printer offline, Disk 100%, BSOD, dugaan Malware/Ransomware).
-6. **Integrasi WhatsApp & Kontak Langsung**:
+7. **Integrasi WhatsApp & Kontak Langsung**:
    - Tombol pesan langsung ke WhatsApp dengan pesan template otomatis.
 
 ---
