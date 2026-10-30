@@ -1,5 +1,5 @@
 /* ===================================================================
-   ALIF.TECH - IT SUPPORT PORTFOLIO & CV JAVASCRIPT
+   SALMAN.TECH - IT SUPPORT PORTFOLIO & CV JAVASCRIPT
    Vanilla ES6+ Interactivity: Theme, Filtering, Modal, Simulator, Print
 =================================================================== */
 
@@ -370,7 +370,7 @@ function initSimulator() {
 
     pingBtn.disabled = true;
     pingBtn.textContent = "Menguji...";
-    pingOutput.textContent = `alif@workstation:~$ ping -c 4 ${target}\n`;
+    pingOutput.textContent = `salman@workstation:~$ ping -c 4 ${target}\n`;
     pingOutput.textContent += `PING ${target} (${target}): 56 data bytes\n`;
 
     let seq = 1;

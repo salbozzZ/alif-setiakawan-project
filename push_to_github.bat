@@ -1,8 +1,8 @@
 @echo off
-title Auto Push to GitHub - Alif Project
+title Auto Push to GitHub - Salman Bazher Project
 color 0b
 echo ====================================================
-echo        AUTO PUSH TO GITHUB - ALIF PROJECT
+echo    AUTO PUSH TO GITHUB - SALMAN BAZHER PROJECT
 echo ====================================================
 echo.
 
