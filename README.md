@@ -7,7 +7,7 @@ Portofolio dan Curriculum Vitae (CV) modern, responsif, dan interaktif khusus un
 ## 📁 Struktur Berkas
 
 ```
-Alif Project/
+Project WDM Salman/
 ├── index.html   # Struktur halaman web lengkap (Hero, CV, Keahlian, Pengalaman, Kasus Proyek, Simulator, Kontak)
 ├── style.css    # Gaya visual modern (Dark/Light mode, Responsif HP/Tablet/Desktop, CSS Khusus Cetak A4 PDF)
 ├── script.js    # Logika interaktif (Ganti tema, Filter proyek, Modal detail kasus, Simulasi Diagnostik IT, Form)
@@ -54,11 +54,11 @@ Alif Project/
 Anda dapat dengan mudah mengubah nama, foto, kontak, atau riwayat kerja dengan membuka file `index.html` menggunakan teks editor (seperti VS Code, Notepad++, atau Notepad biasa):
 
 1. **Mengubah Nama & Gelar**:
-   - Cari kata `Muhammad Alif` dan ganti dengan nama lengkap Anda.
+   - Cari kata `Salman Bazher` dan ganti dengan nama lengkap Anda jika diperlukan.
    - Cari `IT Support Specialist` untuk menyesuaikan titel jabatan yang Anda inginkan.
 2. **Mengubah Kontak & WhatsApp**:
    - Cari tautan `https://wa.me/6281234567890` di `index.html` dan ganti angka `6281234567890` dengan nomor WhatsApp aktif Anda (diawali kode negara 62).
-   - Cari `muhammad.alif.itsupport@email.com` dan ganti dengan email asli Anda.
+   - Cari `salman.bazher.itsupport@email.com` dan ganti dengan email asli Anda.
 3. **Mengubah Pengalaman Kerja**:
    - Temukan bagian `<section id="pengalaman">` di `index.html`. Anda dapat mengedit nama perusahaan, tahun bekerja, dan poin tanggung jawab sesuai pengalaman Anda.
 4. **Mengubah Sertifikasi & Pendidikan**:
